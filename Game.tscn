@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Brick/Brick_Container.gd" type="Script" id=1]
 [ext_resource path="res://Paddle/Paddle.tscn" type="PackedScene" id=2]
@@ -9,6 +9,13 @@
 [ext_resource path="res://UI/HUD.tscn" type="PackedScene" id=7]
 [ext_resource path="res://UI/Instructions.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Effects/Fever.gd" type="Script" id=9]
+[ext_resource path="res://Assets/BrickBanger.mp3" type="AudioStream" id=10]
+[ext_resource path="res://Assets/350919__cabled_mess__hurt_c_05.wav" type="AudioStream" id=11]
+[ext_resource path="res://Assets/350921__cabled_mess__hurt_c_03.wav" type="AudioStream" id=12]
+[ext_resource path="res://Assets/578791__nomiqbomi__noise-hit-1.mp3" type="AudioStream" id=13]
+[ext_resource path="res://Assets/350926__cabled_mess__hurt_c_07.wav" type="AudioStream" id=14]
+[ext_resource path="res://UI/Camera2D.gd" type="Script" id=15]
+[ext_resource path="res://Assets/back_cave.png" type="Texture" id=16]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 100, 500 )
@@ -18,6 +25,11 @@ extents = Vector2( 612, 100 )
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 4 )
+
+[node name="Background" type="Sprite" parent="."]
+scale = Vector2( 0.52, 0.4 )
+texture = ExtResource( 16 )
+centered = false
 
 [node name="Wall_Container" type="Node2D" parent="."]
 
@@ -90,5 +102,26 @@ visible = false
 
 [node name="Instructions" parent="UI" instance=ExtResource( 8 )]
 pause_mode = 2
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 10 )
+autoplay = true
+
+[node name="Brick" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 11 )
+
+[node name="Wall" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 12 )
+
+[node name="Paddle" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 14 )
+
+[node name="Death" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 13 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+anchor_mode = 0
+current = true
+script = ExtResource( 15 )
 
 [connection signal="timeout" from="Fever/Timer" to="Fever" method="_on_Timer_timeout"]
